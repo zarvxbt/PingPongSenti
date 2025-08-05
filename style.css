@@ -60,22 +60,3 @@ body, html {
   background-color: #28f;
   box-shadow: 0 0 10px #333;
   margin: 10px 0;
-}
-
-#scoreboard {
-  display: flex;
-  justify-content: space-around;
-  width: 300px;
-  font-size: 18px;
-  margin: 10px;
-  color: white;
-}
-
-#restartBtn {
-  padding: 10px 20px;
-  margin-top: 10px;
-  border: none;
-  background: #fff;
-  border-radius: 8px;
-  cursor: pointer;
-}
