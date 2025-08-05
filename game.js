@@ -1,87 +1,84 @@
-const config = {
-  type: Phaser.AUTO,
-  width: 600,
-  height: 400,
-  parent: 'game-container',
-  physics: {
-    default: 'arcade',
-    arcade: {
-      gravity: { y: 0 },
-      debug: false
-    }
-  },
-  scene: {
-    preload,
-    create,
-    update
-  }
-};
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
-let player, ai, ball;
 let playerScore = 0;
 let aiScore = 0;
-let playerScoreText, aiScoreText;
 
-const game = new Phaser.Game(config);
+const paddleWidth = 10, paddleHeight = 80;
+let playerY = canvas.height / 2 - paddleHeight / 2;
+let aiY = playerY;
+const ballSize = 10;
+let ballX = canvas.width / 2, ballY = canvas.height / 2;
+let ballSpeedX = 4, ballSpeedY = 4;
 
-function preload() {
-  this.load.image('paddle', 'https://i.imgur.com/IaUrttj.png');
-  this.load.image('ball', 'https://i.imgur.com/WP8dJDp.png');
-}
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-function create() {
-  player = this.physics.add.image(300, 380, 'paddle').setImmovable();
-  ai = this.physics.add.image(300, 20, 'paddle').setImmovable();
-  ball = this.physics.add.image(300, 200, 'ball');
-  ball.setCollideWorldBounds(true);
-  ball.setBounce(1);
-  this.physics.world.setBoundsCollision(true, true, true, true);
+  // Player paddle
+  ctx.fillRect(0, playerY, paddleWidth, paddleHeight);
 
-  this.physics.add.collider(ball, player);
-  this.physics.add.collider(ball, ai);
+  // AI paddle
+  ctx.fillRect(canvas.width - paddleWidth, aiY, paddleWidth, paddleHeight);
 
-  this.input.on('pointermove', pointer => {
-    player.x = Phaser.Math.Clamp(pointer.x, 50, 550);
-  });
+  // Ball
+  ctx.beginPath();
+  ctx.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
+  ctx.fill();
 
-  launchBall();
+  // Move ball
+  ballX += ballSpeedX;
+  ballY += ballSpeedY;
 
-  playerScoreText = document.getElementById("playerScore");
-  aiScoreText = document.getElementById("aiScore");
-}
+  // Bounce off top/bottom
+  if (ballY < 0 || ballY > canvas.height) ballSpeedY = -ballSpeedY;
 
-function update() {
-  if (ball.y < 0) {
-    playerScore++;
-    playerScoreText.textContent = playerScore;
-    resetBall();
-  } else if (ball.y > 400) {
+  // Bounce off player paddle
+  if (ballX < paddleWidth && ballY > playerY && ballY < playerY + paddleHeight) {
+    ballSpeedX = -ballSpeedX;
+  }
+
+  // Bounce off AI paddle
+  if (ballX > canvas.width - paddleWidth &&
+      ballY > aiY && ballY < aiY + paddleHeight) {
+    ballSpeedX = -ballSpeedX;
+  }
+
+  // Score check
+  if (ballX < 0) {
     aiScore++;
-    aiScoreText.textContent = aiScore;
+    updateScore();
+    resetBall();
+  } else if (ballX > canvas.width) {
+    playerScore++;
+    updateScore();
     resetBall();
   }
 
-  ai.x = Phaser.Math.Clamp(ball.x, 50, 550);
+  // AI movement (simple)
+  aiY += (ballY - (aiY + paddleHeight / 2)) * 0.05;
 }
 
-function launchBall() {
-  const angle = Phaser.Math.Between(-60, 60);
-  const speed = 200;
-  const radian = Phaser.Math.DegToRad(angle);
-  ball.setPosition(300, 200);
-  ball.setVelocity(speed * Math.cos(radian), speed * Math.sin(radian));
+function updateScore() {
+  document.getElementById('playerScore').textContent = playerScore;
+  document.getElementById('aiScore').textContent = aiScore;
 }
 
 function resetBall() {
-  ball.setVelocity(0);
-  ball.setPosition(300, 200);
-  setTimeout(() => launchBall(), 1000);
+  ballX = canvas.width / 2;
+  ballY = canvas.height / 2;
+  ballSpeedX = -ballSpeedX;
 }
 
-function restartGame() {
+function resetGame() {
   playerScore = 0;
   aiScore = 0;
-  playerScoreText.textContent = playerScore;
-  aiScoreText.textContent = aiScore;
+  updateScore();
   resetBall();
 }
+
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  playerY = e.clientY - rect.top - paddleHeight / 2;
+});
+
+setInterval(draw, 1000 / 60);
