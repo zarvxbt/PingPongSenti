@@ -1,62 +1,37 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body, html {
-  height: 100%;
-  font-family: sans-serif;
-}
-
-.container {
-  display: flex;
-  height: 100vh;
-  background: linear-gradient(to right, #0ed2f7, #b2fefa);
-}
-
-.sidebar, .ads {
-  width: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  background-color: #ffffffaa;
-}
-
-.icon {
-  width: 60px;
-  height: 60px;
-  margin: 10px 0;
-  background: #fff;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-}
-
-.ad-box {
-  width: 80px;
-  height: 100px;
-  background: #ffd700;
-  margin: 10px 0;
-  border-radius: 8px;
+body {
+  font-family: Arial, sans-serif;
   text-align: center;
-  padding: 5px;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 20px;
 }
 
-.game-area {
-  flex: 1;
+.header {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-#game-container {
-  width: 600px;
-  height: 400px;
-  background-color: #28f;
-  box-shadow: 0 0 10px #333;
-  margin: 10px 0;
+.sentient-logo {
+  height: 48px;
+}
+
+canvas {
+  border: 2px solid #333;
+  background-color: #f0f0f0;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 14px;
+}
