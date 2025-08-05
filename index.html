@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,26 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="game-container"></div>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="icon">🏓</div>
+      <div class="icon">🎮</div>
+      <div class="icon">💡</div>
+    </aside>
+    <main class="game-area">
+      <h1>Ping Pong Go!</h1>
+      <div id="scoreboard">
+        <span>Player: <span id="playerScore">0</span></span>
+        <span>AI: <span id="aiScore">0</span></span>
+      </div>
+      <div id="game-container"></div>
+      <button onclick="restartGame()" id="restartBtn">Restart</button>
+    </main>
+    <aside class="ads">
+      <div class="ad-box">Ad Space</div>
+      <div class="ad-box">More Games</div>
+    </aside>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
   <script src="game.js"></script>
 </body>
