@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ping Pong Go! - Sentient Edition</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ping Pong Go! – Sentient Edition</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/sentient-logo.png" type="image/png" />
 </head>
 <body>
-  <header>
+  <header class="header">
     <a href="https://sentient.foundation" target="_blank">
-      <img src="assets/sentient-logo.png" alt="Sentient Logo" id="sentient-logo">
+      <img src="assets/sentient-logo.png" alt="Sentient Logo" class="sentient-logo" />
     </a>
     <h1>Ping Pong Go!</h1>
-    <h2>Player: <span id="playerScore">0</span> AI: <span id="aiScore">0</span></h2>
+    <h2>Player: <span id="playerScore">0</span> &nbsp; AI: <span id="aiScore">0</span></h2>
   </header>
 
   <main>
     <canvas id="gameCanvas" width="500" height="400"></canvas>
+    <br />
     <button id="restartButton">Restart</button>
   </main>
 
   <footer>
-    <p>Made for <a href="https://sentient.foundation" target="_blank">Sentient.Foundation</a> – Open Source AI Future</p>
+    <p>
+      Built with ❤️ for 
+      <a href="https://sentient.foundation" target="_blank">Sentient.Foundation</a><br />
+      <small>Open source. Community powered.</small>
+    </p>
   </footer>
 
   <script src="game.js"></script>
