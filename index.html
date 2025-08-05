@@ -1,34 +1,29 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ping Pong Go Clone</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ping Pong Go! - Sentient Edition</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <div class="icon">🏓</div>
-      <div class="icon">🎮</div>
-      <div class="icon">💡</div>
-    </aside>
-    <main class="game-area">
-      <h1>Ping Pong Go!</h1>
-      <div id="scoreboard">
-        <span>Player: <span id="playerScore">0</span></span>
-        <span>AI: <span id="aiScore">0</span></span>
-      </div>
-      <div id="game-container"></div>
-      <button onclick="restartGame()" id="restartBtn">Restart</button>
-    </main>
-    <aside class="ads">
-      <div class="ad-box">Ad Space</div>
-      <div class="ad-box">More Games</div>
-    </aside>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
+  <header>
+    <a href="https://sentient.foundation" target="_blank">
+      <img src="assets/sentient-logo.png" alt="Sentient Logo" id="sentient-logo">
+    </a>
+    <h1>Ping Pong Go!</h1>
+    <h2>Player: <span id="playerScore">0</span> AI: <span id="aiScore">0</span></h2>
+  </header>
+
+  <main>
+    <canvas id="gameCanvas" width="500" height="400"></canvas>
+    <button id="restartButton">Restart</button>
+  </main>
+
+  <footer>
+    <p>Made for <a href="https://sentient.foundation" target="_blank">Sentient.Foundation</a> – Open Source AI Future</p>
+  </footer>
+
   <script src="game.js"></script>
 </body>
 </html>
